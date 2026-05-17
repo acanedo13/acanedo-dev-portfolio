@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { SunIcon, MoonIcon } from '@chakra-ui/icons'
-import { FaPlay, FaEnvelope, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa'
+import { FaChevronRight, FaChevronLeft, FaPlay, FaEnvelope, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa'
 import { SiCanva, SiKubernetes, SiPostgresql, SiFastapi, SiSharp, SiDotnet, SiNeo4J } from 'react-icons/si'
 
 
@@ -27,51 +27,115 @@ const FadeIn = ({ children }) => (
 const AdGallery = ({ assets }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selected, setSelected] = useState(null);
+  const carouselRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (carouselRef.current) {
+      const scrollAmount = direction === 'left' ? -300 : 300;
+      carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   return (
-    <SimpleGrid columns={[2, 4]} spacing={4} mt={6}>
-      {assets.map((asset, i) => (
-        <Box 
-          key={i} 
-          position="relative"
-          cursor="pointer" 
-          onClick={() => { setSelected(asset); onOpen(); }}
-          border="1px solid"
-          borderColor={useColorModeValue("gray.200", "whiteAlpha.200")}
-          _hover={{ transform: "scale(1.03)", borderColor: "#654F69" }}
-          transition="0.2s"
-          overflow="hidden"
-        >
-          {/* Thumbnail Image */}
-          <img src={asset.thumbnail} alt="Asset thumbnail" />
-          
-          {/* Only show Play icon if it's a video */}
-          {asset.type === 'video' && (
-            <Flex position="absolute" inset="0" align="center" justify="center" opacity="0.6">
-              <FaPlay size="20px" color="white" />
-            </Flex>
-          )}
-        </Box>
-      ))}
+    <Box position="relative" mt={6} w="100%">
+      {/* Left Scroll Arrow */}
+      <IconButton
+        icon={<FaChevronLeft />}
+        position="absolute"
+        left="-15px"
+        top="50%"
+        transform="translateY(-50%)"
+        zIndex={2}
+        onClick={() => scroll('left')}
+        rounded="full"
+        size="sm"
+        aria-label="Scroll left"
+        boxShadow="md"
+      />
 
+      {/* Carousel Container */}
+      <Flex 
+        ref={carouselRef}
+        overflowX="auto" 
+        gap={4} 
+        pb={4}
+        px={2}
+        scrollSnapType="x mandatory"
+        sx={{
+          scrollbarWidth: 'none',
+          '&::-webkit-scrollbar': { display: 'none' },
+        }}
+      >
+        {assets.map((asset, i) => (
+          <Box 
+            key={i} 
+            position="relative"
+            cursor="pointer" 
+            onClick={() => { setSelected(asset); onOpen(); }}
+            border="1px solid"
+            borderColor={useColorModeValue("gray.200", "whiteAlpha.200")}
+            _hover={{ transform: "scale(1.03)", borderColor: "#654F69" }}
+            transition="0.2s"
+            overflow="hidden"
+            borderRadius="md"
+            minW={["160px", "200px"]} // Fixed width for carousel items
+            h={["160px", "200px"]}
+            flexShrink={0}
+            scrollSnapAlign="start"
+            bg="blackAlpha.200"
+          >
+            {/* Thumbnail Image/Video (Fixed to allow .mp4s as thumbnails) */}
+            {asset.type === 'video' ? (
+              <Box as="video" src={asset.thumbnail || asset.src} w="100%" h="100%" objectFit="cover" muted playsInline />
+            ) : (
+              <Box as="img" src={asset.thumbnail || asset.src} alt="Asset thumbnail" w="100%" h="100%" objectFit="cover" />
+            )}
+            
+            {/* Play icon overlay for videos */}
+            {asset.type === 'video' && (
+              <Flex position="absolute" inset="0" align="center" justify="center" bg="blackAlpha.400" transition="0.2s" _hover={{ bg: "blackAlpha.200" }}>
+                <FaPlay size="24px" color="white" />
+              </Flex>
+            )}
+          </Box>
+        ))}
+      </Flex>
+
+      {/* Right Scroll Arrow */}
+      <IconButton
+        icon={<FaChevronRight />}
+        position="absolute"
+        right="-15px"
+        top="50%"
+        transform="translateY(-50%)"
+        zIndex={2}
+        onClick={() => scroll('right')}
+        rounded="full"
+        size="sm"
+        aria-label="Scroll right"
+        boxShadow="md"
+      />
+
+      {/* Asset Modal */}
       <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
         <ModalOverlay backdropFilter="blur(10px)" />
         <ModalContent bg="black" overflow="hidden">
-          <ModalCloseButton color="white" />
-          <ModalBody p={0}>
+          <ModalCloseButton color="white" zIndex={2} />
+          <ModalBody p={0} display="flex" justifyContent="center">
             {selected?.type === 'video' ? (
-              <video autoPlay loop muted playsInline style={{ width: '100%' }}>
+              <video autoPlay loop controls playsInline style={{ width: '100%', maxHeight: '80vh' }}>
                 <source src={selected.src} type="video/mp4" />
               </video>
             ) : (
-              <img src={selected?.src} alt="Full asset" />
+              <img src={selected?.src} alt="Full asset" style={{ maxHeight: '80vh', objectFit: 'contain' }} />
             )}
           </ModalBody>
         </ModalContent>
       </Modal>
-    </SimpleGrid>
+    </Box>
   );
 };
+
 
   {/* --- THE PROJECT ROW COMPONENT --- */}
 const ProjectRow = ({ title, description, videoSrc, tags, link }) => {
@@ -132,12 +196,16 @@ const ProjectRow = ({ title, description, videoSrc, tags, link }) => {
 };
 
 const MarketingProjectRow = ({ title, description, assets }) => {
+  // Moved these inside the component so they resolve correctly
+  const borderColor = useColorModeValue("gray.300", "whiteAlpha.200");
+  const headingColor = useColorModeValue("#1A202C", "white");
+
   return (
     <Box 
       p={4}
       borderRadius="md"
       borderLeft="4px solid"
-      borderColor={borderColor} // your theme color
+      borderColor={borderColor}
       bg={useColorModeValue("blackAlpha.50", "whiteAlpha.50")}
     >
       <Heading size="md" color={headingColor}>{title}</Heading>
