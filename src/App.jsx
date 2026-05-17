@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { 
-  Box, Heading, Text, Container, VStack, HStack, Link, Divider, 
-  Badge, SimpleGrid, Flex, IconButton, Button, 
+  AdGallery, Box, Heading, Text, Container, VStack, HStack, Link, 
+  Divider, Badge, SimpleGrid, Flex, IconButton, Button, 
   useColorMode, useColorModeValue, Tooltip, Modal, ModalOverlay,
-  ModalContent, ModalBody, ModalCloseButton, useDisclosure
+  ModalContent, ModalBody, ModalCloseButton, useDisclosure,
+  useState
 } from '@chakra-ui/react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { SunIcon, MoonIcon } from '@chakra-ui/icons'
-import { FaEnvelope, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa'
+import { FaPlay, FaEnvelope, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa'
 import { SiCanva, SiKubernetes, SiPostgresql, SiFastapi, SiSharp, SiDotnet, SiNeo4J } from 'react-icons/si'
 
 const FadeIn = ({ children }) => (
@@ -39,6 +40,55 @@ function App() {
   const bgColor = useColorModeValue("#d8d5db", "#151518")
   const headingColor = useColorModeValue("#1A202C", "white")
   const borderColor = useColorModeValue("gray.300", "whiteAlpha.200")
+
+  const AdGallery = ({ assets }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [selected, setSelected] = useState(null);
+
+  return (
+    <SimpleGrid columns={[2, 4]} spacing={4} mt={6}>
+      {assets.map((asset, i) => (
+        <Box 
+          key={i} 
+          position="relative"
+          cursor="pointer" 
+          onClick={() => { setSelected(asset); onOpen(); }}
+          border="1px solid"
+          borderColor={useColorModeValue("gray.200", "whiteAlpha.200")}
+          _hover={{ transform: "scale(1.03)", borderColor: "#654F69" }}
+          transition="0.2s"
+          overflow="hidden"
+        >
+          {/* Thumbnail Image */}
+          <img src={asset.thumbnail} alt="Asset thumbnail" />
+          
+          {/* Only show Play icon if it's a video */}
+          {asset.type === 'video' && (
+            <Flex position="absolute" inset="0" align="center" justify="center" opacity="0.6">
+              <FaPlay size="20px" color="white" />
+            </Flex>
+          )}
+        </Box>
+      ))}
+
+      <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+        <ModalOverlay backdropFilter="blur(10px)" />
+        <ModalContent bg="black" overflow="hidden">
+          <ModalCloseButton color="white" />
+          <ModalBody p={0}>
+            {selected?.type === 'video' ? (
+              <video autoPlay loop muted playsInline style={{ width: '100%' }}>
+                <source src={selected.src} type="video/mp4" />
+              </video>
+            ) : (
+              <img src={selected?.src} alt="Full asset" />
+            )}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </SimpleGrid>
+  );
+};
 
   {/* --- THE PROJECT ROW COMPONENT --- */}
 const ProjectRow = ({ title, description, videoSrc, tags, link }) => {
@@ -300,11 +350,33 @@ const ProjectRow = ({ title, description, videoSrc, tags, link }) => {
                 <ProjectRow 
                   title="Owl-ternative | Digital Community"
                   description="Brand Architect & Lead Developer. Delivered a fully bespoke e-commerce experience from concept to launch. Key achievement: Engineered a sophisticated, custom anonymous submission archive. Overcame core Shopify constraints to implement a highly complex backend-to-UI pipeline for asynchronous user-generated content."
-                  videoSrc="/owl-ternative_demo_1.mp4" 
+                  videoSrc="/owl-ternative_demo.mp4" 
                   tags={[FaHtml5, FaCss3Alt, SiCanva]}
                   link="https://owl-ternative.com" 
                 />
               </VStack>
+            </Box>
+          </FadeIn>
+
+           <FadeIn>
+            <Box as="section">
+              <Text fontSize="sm" fontWeight="mono" color={mauveAccent} mb={10} letterSpacing="widest" sx={{"::before": { content: '"root@adriana:~# "' }}}>
+                MARKETING_ASSETS_ARCHIVE
+              </Text>
+              <AdGallery assets={[
+                { src: "/Wireframe.png", thumbnail: "/Wireframe.png", type: "image" },
+                { src: "/WireframeFlowChart.png", thumbnail: "/WireframeFlowChart.png", type: "image" },
+                { src: "/FriendshipFavor.png", thumbnail: "/FriendshipFavor.png", type: "image" },
+                { src: "/PokemonInviteFront.png", thumbnail: "/PokemonInviteFront.png", type: "image" },
+                { src: "/PokemonInviteBack.png", thumbnail: "/PokemonInviteBack.png", type: "image" },
+                { src: "/PlayCard.png", thumbnail: "/PlayCard.png", type: "image" },
+                { src: "/ChatAd.mp4", thumbnail: "/ChatAd.mp4", type: "video" },
+                { src: "/CollectionsAd.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" },
+                { src: "/Collections10s.mp4", thumbnail: "/Collections10s.mp4", type: "video" },
+                { src: "/Owl-ternativeAD.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" },
+                { src: "/WarrantAd.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" },
+                { src: "/campaign-2.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" }
+              ]} />
             </Box>
           </FadeIn>
           
