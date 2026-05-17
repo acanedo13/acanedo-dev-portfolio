@@ -261,12 +261,15 @@ function App() {
   ];
 
   const certifications = [
-  { name: "A+", org: "CompTIA" },
-  { name: "Network+", org: "CompTIA" },
-  { name: "Security+", org: "CompTIA" },
-  { name: "Project+", org: "CompTIA" },
-  { name: "Certified Cloud Practitioner", org: "AWS" },
-  
+  { name: "A+", org: "CompTIA", status: "completed" },
+  { name: "Network+", org: "CompTIA", status: "completed" },
+  { name: "Security+", org: "CompTIA", status: "completed" },
+  { name: "Project+", org: "CompTIA", status: "completed" },
+  { name: "Certified Cloud Practitioner", org: "AWS", status: "completed" },              
+  { name: "Certified Associate Python Programmer", org: "Python Institute", status: "pending" },
+  { name: "Azure AI Engineer Associate", org: "Microsoft", status: "pending" },
+  { name: "Azure Fundamentals", org: "Microsoft", status: "pending" },
+  { name: "Azure Data Fundamentals", org: "Microsoft", status: "pending" },
 ];
 
   return (
@@ -412,11 +415,17 @@ function App() {
               `}</style>
               
               <VStack align="start" spacing={2} mt={6} fontFamily="monospace">
-                {certifications.map((cert) => (
-                  <Text key={cert.name} fontSize="xs" color={silverText}>
-                    <span style={{ color: 'darkgreen' }}>[SUCCESS]</span> Loading {cert.org}_{cert.name.replace(/\s+/g, '_')} ...
-                  </Text>
-                ))}
+                {certifications.map((cert) => {
+                  const isPending = cert.status === "pending";
+                  const statusText = isPending ? "[LOADING]" : "[SUCCESS]";
+                  const statusColor = isPending ? "#D69E2E" : "darkgreen";
+
+                  return (
+                    <Text key={cert.name} fontSize="xs" color={silverText}>
+                      <span style={{ color: statusColor }}>{statusText}</span> {cert.org}_{cert.name.replace(/\s+/g, '_')}
+                    </Text>
+                  );
+                })}
               </VStack>
             </Box>
           </FadeIn>
