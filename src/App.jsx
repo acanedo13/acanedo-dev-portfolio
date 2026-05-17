@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { SunIcon, MoonIcon } from '@chakra-ui/icons'
-import { FaLinkedin, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa'
+import { FaEnvelope, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa'
 import { SiCanva, SiKubernetes, SiPostgresql, SiFastapi, SiSharp, SiDotnet, SiNeo4J } from 'react-icons/si'
 
 const FadeIn = ({ children }) => (
