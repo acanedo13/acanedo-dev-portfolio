@@ -140,8 +140,10 @@ const AdGallery = ({ assets }) => {
   {/* --- THE PROJECT ROW COMPONENT --- */}
 const ProjectRow = ({ title, description, videoSrc, tags, link }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const videoRef = React.useRef(null);
+  const videoRef = useRef(null);
   const hoverBg = useColorModeValue("blackAlpha.50", "whiteAlpha.50");
+  const mauveAccent = "#654F69";
+  const silverText = useColorModeValue("#4A5568", "#BCC6CC");
 
   return (
     <>
@@ -151,7 +153,6 @@ const ProjectRow = ({ title, description, videoSrc, tags, link }) => {
         p={4}
         borderRadius="md"
         transition="all 0.2s"
-        _hover={{ bg: hoverBg, transform: "translateX(10px)" }}
         borderLeft="4px solid"
         borderColor={useColorModeValue("gray.200", "whiteAlpha.200")}
         _hover={{ borderColor: "#654F69", bg: hoverBg, transform: "translateX(5px)" }}
