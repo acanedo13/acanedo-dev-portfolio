@@ -3,7 +3,7 @@ import {
   Box, Heading, Text, Container, VStack, HStack, Link, 
   Divider, Badge, SimpleGrid, Flex, IconButton, Button, 
   useColorMode, useColorModeValue, Tooltip, Modal, ModalOverlay,
-  ModalContent, ModalBody, ModalCloseButton, useDisclosure
+  ModalContent, ModalBody, ModalCloseButton, useDisclosure, Image
 } from '@chakra-ui/react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { SunIcon, MoonIcon } from '@chakra-ui/icons'
@@ -78,18 +78,21 @@ const AdGallery = ({ assets }) => {
             transition="0.2s"
             overflow="hidden"
             borderRadius="md"
-            minW={["160px", "200px"]} // Fixed width for carousel items
+            minW={["160px", "200px"]} 
             h={["160px", "200px"]}
             flexShrink={0}
             scrollSnapAlign="start"
             bg="blackAlpha.200"
           >
-            {/* Thumbnail Image/Video (Fixed to allow .mp4s as thumbnails) */}
-            {asset.type === 'video' ? (
-              <Box as="video" src={asset.thumbnail || asset.src} w="100%" h="100%" objectFit="cover" muted playsInline />
-            ) : (
-              <Box as="img" src={asset.thumbnail || asset.src} alt="Asset thumbnail" w="100%" h="100%" objectFit="cover" />
-            )}
+            {/* THUMBNAILS: Using Chakra's Image component so fallbackSrc works perfectly */}
+            <Image 
+              src={asset.thumbnail || asset.src} 
+              alt="Asset thumbnail" 
+              w="100%" 
+              h="100%" 
+              objectFit="cover" 
+              fallbackSrc="https://via.placeholder.com/200?text=Image+Not+Found" 
+            />
             
             {/* Play icon overlay for videos */}
             {asset.type === 'video' && (
@@ -123,11 +126,11 @@ const AdGallery = ({ assets }) => {
           <ModalCloseButton color="white" zIndex={2} />
           <ModalBody p={0} display="flex" justifyContent="center">
             {selected?.type === 'video' ? (
-              <video autoPlay loop controls playsInline style={{ width: '100%', maxHeight: '80vh' }}>
+              <video key={selected.src} autoPlay loop controls playsInline style={{ width: '100%', maxHeight: '80vh' }}>
                 <source src={selected.src} type="video/mp4" />
               </video>
             ) : (
-              <img src={selected?.src} alt="Full asset" style={{ maxHeight: '80vh', objectFit: 'contain' }} />
+              <Image src={selected?.src} alt="Full asset" style={{ maxHeight: '80vh', objectFit: 'contain' }} />
             )}
           </ModalBody>
         </ModalContent>
@@ -466,7 +469,7 @@ function App() {
                 { src: "/Collections10s.mp4", thumbnail: "/Collections10s_thumbnail.jpg", type: "video" },
                 { src: "/Owl-ternativeAD.mp4", thumbnail: "/Owl-ternativeAD_thumbnail.jpg", type: "video" },
                 { src: "/WarrantAd.mp4", thumbnail: "/WarrantAd_thumbnail.jpg", type: "video" },
-                { src: "/campaign-2.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" }
+                { src: "/ConstellationAd.mp4", thumbnail: "/ConstellationAd_thumbnail.jpg", type: "video" }
               ]} />
             </Box>
           </FadeIn>
