@@ -456,21 +456,22 @@ function App() {
                               @keyframes blink { 50% { opacity: 0; } }
                             `}</style>               <MarketingProjectRow 
                 title="Strategic Design & Visual Identity" 
-                description="A collection of wireframes, digital marketing assets, and ad campaigns designed to bridge brand identity with functional UX."
+                description="If I can't find what I'm looking for — I create my vision. A collection of wireframes, digital assets, and ad campaigns designed to bridge brand identity with functional UX."
                 assets={[
                 { src: "/Wireframe.png", type: "image" },
-                { src: "/WireframeFlowChart.png", type: "image" },
+                { src: "/WireframeFlowChart.PNG", type: "image" },
                 { src: "/FriendshipFavor.png", type: "image" },
-                { src: "/PokemonInviteFront.png", type: "image" },
-                { src: "/PokemonInviteBack.png", type: "image" },
+                { src: "/PokemonInviteFront.jpg", type: "image" },
+                { src: "/PokemonInviteBack.jpg", type: "image" },
                 { src: "/PlayCard.png", type: "image" },
                 { src: "/ChatAd.mp4", thumbnail: "/ChatAd_thumbnail.jpg", type: "video" },
-                { src: "/CollectionsAd.mp4", thumbnail: "/CollectionsAd_thumbnail.jpg", type: "video" },
-                { src: "/Collections10s.mp4", thumbnail: "/Collections10s_thumbnail.jpg", type: "video" },
-                { src: "/Owl-ternativeAD.mp4", thumbnail: "/Owl-ternativeAD_thumbnail.jpg", type: "video" },
-                { src: "/WarrantAd.mp4", thumbnail: "/WarrantAd_thumbnail.jpg", type: "video" },
-                { src: "/ConstellationAd.mp4", thumbnail: "/ConstellationAd_thumbnail.jpg", type: "video" }
-              ]} />
+                { src: "/Collections Ad.mp4", thumbnail: "/Collections Ad_thumbnail.jpg", type: "video" },
+                { src: "/Collections 10s.mp4", thumbnail: "/Collections 10s_thumbnail.jpg", type: "video" },
+                { src: "/Owl-ternative AD.mp4", thumbnail: "/Owl-ternative AD_thumbnail.jpg", type: "video" },
+                { src: "/WarrantAd.mp4", thumbnail: "/WarrantAd_thumbnail.jpg", type: "video" }, // Working!
+                { src: "/Constellation Ad.mp4", thumbnail: "/Constellation Ad_thumbnail.jpg", type: "video" }
+                ]} 
+              />
             </Box>
           </FadeIn>
           
