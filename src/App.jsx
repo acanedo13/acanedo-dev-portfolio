@@ -448,8 +448,10 @@ function App() {
 
            <FadeIn>
             <Box as="section">
-              <Text fontSize="sm" fontWeight="mono" color={mauveAccent} mb={10} letterSpacing="widest" sx={{"::before": { content: '"root@adriana:~# "' }}}>MARKETING_ASSETS_ARCHIVE</Text>
-              <MarketingProjectRow 
+              <Text fontSize="sm" fontWeight="mono" color={mauveAccent} mt= {5} mb={10} letterSpacing="widest"sx={{"::before": { content: '"root@adriana:~# "' }, "::after": { content: '"_"', animation: "blink 1s infinite" }}}>ASSETS_ARCHIVE</Text>
+                              <style>{`
+                              @keyframes blink { 50% { opacity: 0; } }
+                            `}</style>               <MarketingProjectRow 
                 title="Strategic Design & Visual Identity" 
                 description="A collection of wireframes, digital marketing assets, and ad campaigns designed to bridge brand identity with functional UX."
                 assets={[
@@ -459,11 +461,11 @@ function App() {
                 { src: "/PokemonInviteFront.png", type: "image" },
                 { src: "/PokemonInviteBack.png", type: "image" },
                 { src: "/PlayCard.png", type: "image" },
-                { src: "/ChatAd.mp4", thumbnail: "/ChatAd.mp4", type: "video" },
-                { src: "/CollectionsAd.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" },
-                { src: "/Collections10s.mp4", thumbnail: "/Collections10s.mp4", type: "video" },
-                { src: "/Owl-ternativeAD.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" },
-                { src: "/WarrantAd.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" },
+                { src: "/ChatAd.mp4", thumbnail: "/ChatAd_thumbnail.jpg", type: "video" },
+                { src: "/CollectionsAd.mp4", thumbnail: "/CollectionsAd_thumbnail.jpg", type: "video" },
+                { src: "/Collections10s.mp4", thumbnail: "/Collections10s_thumbnail.jpg", type: "video" },
+                { src: "/Owl-ternativeAD.mp4", thumbnail: "/Owl-ternativeAD_thumbnail.jpg", type: "video" },
+                { src: "/WarrantAd.mp4", thumbnail: "/WarrantAd_thumbnail.jpg", type: "video" },
                 { src: "/campaign-2.mp4", thumbnail: "/CollectionsAd.mp4", type: "video" }
               ]} />
             </Box>
