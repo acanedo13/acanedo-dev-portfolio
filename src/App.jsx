@@ -456,7 +456,7 @@ function App() {
                               @keyframes blink { 50% { opacity: 0; } }
                             `}</style>               <MarketingProjectRow 
                 title="Strategic Design & Visual Identity" 
-                description="If I can't find what I'm looking for — I create my vision. A collection of wireframes, digital assets, and ad campaigns designed to bridge brand identity with functional UX."
+                description="When existing solutions fall short, I engineer bespoke visual experiences. A curated archive of wireframes, digital assets, and ad campaigns designed to bridge brand identity with functional UX."
                 assets={[
                 { src: "/Wireframe.png", type: "image" },
                 { src: "/WireframeFlowChart.PNG", type: "image" },
