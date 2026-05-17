@@ -165,8 +165,12 @@ const ProjectRow = ({ title, description, videoSrc, tags, link }) => {
                 Software Engineer & UI/UX Design Analyst
               </Text>              
               <HStack spacing={8} mt={7} mb = {-4} color={mauveAccent}>
-                <Tooltip label="LinkedIn" aria-label="LinkedIn Tooltip" openDelay={300}><Link href="https://linkedin.com/in/adriana-canedo-6ab8a0122" isExternal aria-label="LinkedIn" _hover={{ color: headingColor }}><FaLinkedin size="24px" /></Link></Tooltip>
-                <Tooltip label="GitHub" aria-label="GitHub Tooltip" openDelay={300}><Link href="https://github.com/acanedo" isExternal aria-label="GitHub" _hover={{ color: headingColor }}><FaGithub size="24px" /></Link></Tooltip>
+                <Tooltip label="Email" aria-label="Email Tooltip" openDelay={300}>
+                  <Link href="mailto:acanedo@wgu.edu" aria-label="Email" _hover={{ color: headingColor }}>
+                    <FaEnvelope size="24px" />
+                  </Link>
+                </Tooltip>                
+                <Tooltip label="GitHub" aria-label="GitHub Tooltip" openDelay={300}><Link href="https://github.com/acanedo13" isExternal aria-label="GitHub" _hover={{ color: headingColor }}><FaGithub size="24px" /></Link></Tooltip>
                 <Tooltip label="Resume" aria-label="Resume Tooltip">
                   <Button
                     variant="ghost"
