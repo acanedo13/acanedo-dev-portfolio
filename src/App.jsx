@@ -1,3 +1,4 @@
+{/* Version 1.0 */}
 import React, { useState, useRef } from 'react'
 import { 
   Box, Heading, Text, Container, VStack, HStack, Link, 
@@ -27,7 +28,15 @@ const FadeIn = ({ children }) => (
 const AdGallery = ({ assets }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selected, setSelected] = useState(null);
+  const [isZoomed, setIsZoomed] = useState(false); // Zoom state
   const carouselRef = useRef(null);
+  const arrowBg = useColorModeValue("#654F69", "#BCBCBC");
+  const arrowColor = useColorModeValue("white", "gray.800");
+  const arrowHoverBg = useColorModeValue("#BCBCBC", "#654F69");
+  const arrowHoverColor = useColorModeValue("gray.800", "white")
+  const modalBg = useColorModeValue("#d8d5db", "#151518");
+  const modalBodyRef = useRef(null);
+  const mauveAccent = "#654F69";
 
   const scroll = (direction) => {
     if (carouselRef.current) {
@@ -36,11 +45,18 @@ const AdGallery = ({ assets }) => {
     }
   };
 
+  const handleClose = () => {
+    setIsZoomed(false);
+    onClose();
+  };
+
   return (
     <Box position="relative" mt={6} w="100%">
       {/* Left Scroll Arrow */}
       <IconButton
         icon={<FaChevronLeft />}
+        bg={arrowBg}
+        color={arrowColor}
         position="absolute"
         left="-15px"
         top="50%"
@@ -51,6 +67,14 @@ const AdGallery = ({ assets }) => {
         size="sm"
         aria-label="Scroll left"
         boxShadow="md"
+        transition="all 0.2s ease-in-out"
+        _hover={{
+          bg: arrowHoverBg,
+          color: arrowHoverColor,
+          transform: "translateY(-50%) scale(1.3)"
+        }}
+        _active={{ transform: "translateY(-50%) scale(0.95)" }}
+
       />
 
       {/* Carousel Container */}
@@ -92,11 +116,40 @@ const AdGallery = ({ assets }) => {
               h="100%" 
               objectFit="cover" 
               fallbackSrc="https://via.placeholder.com/200?text=Image+Not+Found" 
+              pb="40px"
             />
+
+            {/* EVER-PRESENT WRAPPED TEXT LABEL */}
+            <Box
+              position="absolute"
+              bottom={0}
+              left={0}
+              right={0}
+              bg={mauveAccent}
+              p={2}
+              minH="40px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              borderTop="1px solid"
+              borderColor="whiteAlpha.100"
+            >
+              <Text
+                color="white"
+                fontSize="10px"
+                fontFamily="monospace"
+                textAlign="center"
+                whiteSpace="normal"
+                wordBreak="break-word"
+                lineHeight="1.2"
+              >
+                {asset.label?.toUpperCase()}
+              </Text>
+            </Box>
             
             {/* Play icon overlay for videos */}
             {asset.type === 'video' && (
-              <Flex position="absolute" inset="0" align="center" justify="center" bg="blackAlpha.400" transition="0.2s" _hover={{ bg: "blackAlpha.200" }}>
+              <Flex position="absolute" inset="0" bottom="40px" align="center" justify="center" bg="blackAlpha.400" transition="0.2s" _hover={{ bg: "blackAlpha.200" }}>
                 <FaPlay size="24px" color="white" />
               </Flex>
             )}
@@ -107,6 +160,8 @@ const AdGallery = ({ assets }) => {
       {/* Right Scroll Arrow */}
       <IconButton
         icon={<FaChevronRight />}
+        bg={arrowBg}
+        color={arrowColor}
         position="absolute"
         right="-15px"
         top="50%"
@@ -117,22 +172,57 @@ const AdGallery = ({ assets }) => {
         size="sm"
         aria-label="Scroll right"
         boxShadow="md"
+        transition="all 0.2s ease-in-out"
+        _hover={{
+          bg: arrowHoverBg,
+          color: arrowHoverColor,
+          transform: "translateY(-50%) scale(1.3)"
+        }}
+        _active={{ transform: "translateY(-50%) scale(0.95)" }}
+
       />
 
       {/* Asset Modal */}
-      <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+      <Modal isOpen={isOpen} onClose={handleClose} size="xl" isCentered>
         <ModalOverlay backdropFilter="blur(10px)" />
-        <ModalContent bg="black" overflow="hidden">
+        <ModalContent bg={modalBg} overflow="hidden">
           <ModalCloseButton color="white" zIndex={2} />
-          <ModalBody p={0} display="flex" justifyContent="center">
+          <ModalBody 
+            p={0} 
+            display={isZoomed && selected?.isWireframe ? "block" : "flex"} 
+            justifyContent="center"
+            alignItems="center"
+            overflow={isZoomed && selected?.isWireframe ? "auto" : "hidden"}
+            maxH="80vh"
+          >
             {selected?.type === 'video' ? (
               <video key={selected.src} autoPlay loop controls playsInline style={{ width: '100%', maxHeight: '80vh' }}>
                 <source src={selected.src} type="video/mp4" />
               </video>
             ) : (
-              <Image src={selected?.src} alt="Full asset" style={{ maxHeight: '80vh', objectFit: 'contain' }} />
+              <Image 
+                src={selected?.src} 
+                alt="Full asset" 
+                onClick={() => selected?.isWireframe && setIsZoomed(!isZoomed)}
+                cursor={selected?.isWireframe ? (isZoomed ? "zoom-out" : "zoom-in") : "default"}
+                transition="all 0.3s ease"
+                
+                // Layout behavior based on zoom and wireframe status
+                w={isZoomed && selected?.isWireframe ? "180%" : "auto"}
+                maxH={isZoomed && selected?.isWireframe ? "none" : "80vh"} 
+                maxW={isZoomed && selected?.isWireframe ? "none" : "100%"} 
+                m="auto"
+                objectFit="contain" 
+              />
             )}
           </ModalBody>
+          {!isZoomed && selected?.isWireframe && (
+            <Box position="absolute" bottom={4} width="100%" textAlign="center" pointerEvents="none">
+              <Text fontSize="10px" fontWeight="bold" color="blackAlpha.600" fontFamily="monospace" display="inline-block" bg="whiteAlpha.800" px={2} borderRadius="sm">
+                [ CLICK_TO_ZOOM ]
+              </Text>
+            </Box>
+          )}
         </ModalContent>
       </Modal>
     </Box>
@@ -467,18 +557,18 @@ function App() {
                 title="Strategic Design & Visual Identity" 
                 description="When existing solutions fall short, I engineer bespoke visual experiences. A curated archive of wireframes, digital assets, and ad campaigns designed to bridge brand identity with functional UX."
                 assets={[
-                { src: "/Wireframe.png", type: "image" },
-                { src: "/WireframeFlowChart.PNG", type: "image" },
-                { src: "/FriendshipFavor.png", type: "image" },
-                { src: "/PokemonInviteFront.jpg", type: "image" },
-                { src: "/PokemonInviteBack.jpg", type: "image" },
-                { src: "/PlayCard.png", type: "image" },
-                { src: "/ChatAd.mp4", thumbnail: "/ChatAd_thumbnail.jpg", type: "video" },
-                { src: "/Collections Ad.mp4", thumbnail: "/Collections Ad_thumbnail.jpg", type: "video" },
-                { src: "/Collections 10s.mp4", thumbnail: "/Collections 10s_thumbnail.jpg", type: "video" },
-                { src: "/Owl-ternative AD.mp4", thumbnail: "/Owl-ternative AD_thumbnail.jpg", type: "video" },
-                { src: "/WarrantAd.mp4", thumbnail: "/WarrantAd_thumbnail.jpg", type: "video" }, // Working!
-                { src: "/Constellation Ad.mp4", thumbnail: "/Constellation Ad_thumbnail.jpg", type: "video" }
+                  { src: "/Wireframe.png", type: "image", isWireframe: true, label: "UX: Term Tracker Wireframe (Mobile)" },
+                  { src: "/WireframeFlowChart.PNG", type: "image", isWireframe: true, label: "UX: Travel App User Flow (Mobile)" },
+                  { src: "/FriendshipFavor.png", type: "image", label: "Identity: Custom Party Favor" },
+                  { src: "/PokemonInviteFront.jpg", type: "image", label: "Print: Pokemon Invite (Front)" },
+                  { src: "/PokemonInviteBack.jpg", type: "image", label: "Print: Pokemon Invite (Back)" },
+                  { src: "/PlayCard.png", type: "image", label: "Identity: Play Date Asset" },
+                  { src: "/ChatAd.mp4", thumbnail: "/ChatAd_thumbnail.jpg", type: "video", label: "Ad: Chat Style" },
+                  { src: "/Collections Ad.mp4", thumbnail: "/Collections Ad_thumbnail.jpg", type: "video", label: "Ad: Collections Overview" },
+                  { src: "/Collections 10s.mp4", thumbnail: "/Collections 10s_thumbnail.jpg", type: "video", label: "Ad: Collections Preview" },
+                  { src: "/Owl-ternative AD.mp4", thumbnail: "/Owl-ternative AD_thumbnail.jpg", type: "video", label: "Ad: Website Preview" },
+                  { src: "/WarrantAd.mp4", thumbnail: "/WarrantAd_thumbnail.jpg", type: "video", label: "Ad: Polaroid Style" },
+                  { src: "/Constellation Ad.mp4", thumbnail: "/Constellation Ad_thumbnail.jpg", type: "video", label: "Ad: Constellation Content Feature" }
                 ]} 
               />
             </Box>
