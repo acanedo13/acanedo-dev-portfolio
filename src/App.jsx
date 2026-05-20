@@ -186,7 +186,7 @@ const AdGallery = ({ assets }) => {
       <Modal isOpen={isOpen} onClose={handleClose} size="xl" isCentered>
         <ModalOverlay backdropFilter="blur(10px)" />
         <ModalContent bg={modalBg} overflow="hidden">
-          <ModalCloseButton color="white" zIndex={2} />
+          <ModalCloseButton color={mauveAccent} zIndex={2} />
           <ModalBody 
             p={0} 
             display={isZoomed && selected?.isWireframe ? "block" : "flex"} 
