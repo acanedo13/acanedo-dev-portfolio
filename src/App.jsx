@@ -328,7 +328,7 @@ function App() {
   const silverText = useColorModeValue("#4A5568", "#BCC6CC")
   const bgColor = useColorModeValue("#d8d5db", "#151518")
   const headingColor = useColorModeValue("#1A202C", "white")
-  const borderColor = useColorModeValue("gray.300", "whiteAlpha.200")
+  const borderColor = useColorModeValue("#776b7a", "whiteAlpha.300")
 
   const myStack = [
     { icon: SiCanva, label: "CANVA" }, 
@@ -471,7 +471,7 @@ function App() {
               `}</style>
               
               {/* Cleaned up Search Input */}
-              <Box mb={10}>
+              <Box mb={10}>                
                 <input 
                   type="text" 
                   placeholder="grep the core stack"
@@ -508,7 +508,7 @@ function App() {
                 {certifications.map((cert) => {
                   const isPending = cert.status === "pending";
                   const statusText = isPending ? "[LOADING]" : "[SUCCESS]";
-                  const statusColor = isPending ? "#D69E2E" : "darkgreen";
+                  const statusColor = isPending ? "#99701E" : "darkgreen";
 
                   return (
                     <Text key={cert.name} fontSize="xs" color={silverText}>
