@@ -356,7 +356,7 @@ function App() {
   { name: "Security+", org: "CompTIA", status: "completed" },
   { name: "Project+", org: "CompTIA", status: "completed" },
   { name: "Certified Cloud Practitioner", org: "AWS", status: "completed" },
-  { name: "Azure Fundamentals", org: "Microsoft", status: "pending" },  
+  { name: "Azure Fundamentals", org: "Microsoft", status: "completed" },  
   { name: "Azure Data Fundamentals", org: "Microsoft", status: "pending" },
   { name: "Azure AI Engineer Associate", org: "Microsoft", status: "pending" },
   { name: "Certified Associate Python Programmer", org: "Python Institute", status: "pending" },
@@ -559,6 +559,7 @@ function App() {
                 assets={[
                   { src: "/Wireframe.png", type: "image", isWireframe: true, label: "UX: Term Tracker Wireframe (Mobile)" },
                   { src: "/WireframeFlowChart.PNG", type: "image", isWireframe: true, label: "UX: Travel App User Flow (Mobile)" },
+                  { src: "/Designs.png", type: "image", label: "Identity: OWL-TERNATIVE Logo" },
                   { src: "/FriendshipFavor.png", type: "image", label: "Identity: Custom Party Favor" },
                   { src: "/PokemonInviteFront.jpg", type: "image", label: "Print: Pokemon Invite (Front)" },
                   { src: "/PokemonInviteBack.jpg", type: "image", label: "Print: Pokemon Invite (Back)" },
