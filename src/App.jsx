@@ -559,7 +559,7 @@ function App() {
                 assets={[
                   { src: "/Wireframe.png", type: "image", isWireframe: true, label: "UX: Term Tracker Wireframe (Mobile)" },
                   { src: "/WireframeFlowChart.PNG", type: "image", isWireframe: true, label: "UX: Travel App User Flow (Mobile)" },
-                  { src: "/Designs.png", type: "image", label: "Identity: OWL-TERNATIVE Logo" },
+                  { src: "/owl-ternativelogo.png", type: "image", label: "Identity: OWL-TERNATIVE Logo" },
                   { src: "/FriendshipFavor.png", type: "image", label: "Identity: Custom Party Favor" },
                   { src: "/PokemonInviteFront.jpg", type: "image", label: "Print: Pokemon Invite (Front)" },
                   { src: "/PokemonInviteBack.jpg", type: "image", label: "Print: Pokemon Invite (Back)" },
