@@ -357,9 +357,9 @@ function App() {
   { name: "Project+", org: "CompTIA", status: "completed" },
   { name: "Certified Cloud Practitioner", org: "AWS", status: "completed" },
   { name: "Azure Fundamentals", org: "Microsoft", status: "completed" },  
-  { name: "Azure Data Fundamentals", org: "Microsoft", status: "pending" },
-  { name: "Azure AI Engineer Associate", org: "Microsoft", status: "pending" },
-  { name: "Certified Associate Python Programmer", org: "Python Institute", status: "pending" },
+  { name: "Azure Data Fundamentals", org: "Microsoft", status: "completed" },
+  { name: "Azure AI Engineer Associate", org: "Microsoft", status: "completed" },
+  { name: "Certified Entry-Level Python Programmer", org: "Python Institute", status: "completed" },
 ];
 
   return (
