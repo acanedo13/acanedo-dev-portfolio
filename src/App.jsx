@@ -404,7 +404,7 @@ function App() {
                     <FaEnvelope size="24px" />
                   </Link>
                 </Tooltip>                
-                <Tooltip label="GitHub" aria-label="GitHub Tooltip" openDelay={300}><Link href="https://github.com/acanedo13" isExternal aria-label="GitHub" _hover={{ color: headingColor }}><FaGithub size="24px" /></Link></Tooltip>
+                <Tooltip label="GitHub" aria-label="GitHub Tooltip" openDelay={300}><Link href="https://github.com/acanedo13" isExternal aria-label="GitHub" _hover={{ color: headingColor }} style={{ transform: 'translateX(6px)' }}><FaGithub size="24px" /></Link></Tooltip>
                 <Tooltip label="Resume" aria-label="Resume Tooltip">
                   <Button
                     variant="ghost"
@@ -519,7 +519,7 @@ function App() {
               </VStack>
 
               {/* Brand Logos Row under the certifications list */}
-              <HStack spacing={6} pt={8} color={silverText} opacity={0.7} justify="start" w="100%">
+              <HStack spacing={6} pt={8} ml={4} color={silverText} opacity={0.7} justify="start" w="100%">
                 <Tooltip label="Amazon Web Services" openDelay={200}>
                   <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
                     <FaAws size="28px" />
