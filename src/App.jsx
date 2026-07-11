@@ -518,29 +518,29 @@ function App() {
                 })}
               </VStack>
 
-                            {/* Brand Logos Row under the certifications list */}
-                <HStack spacing={6} pt={4} color={silverText} opacity={0.7} justify="start" w="100%">
-                  <Tooltip label="Amazon Web Services" openDelay={200}>
-                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
-                      <FaAws size="28px" />
-                    </Box>
-                  </Tooltip>
-                  <Tooltip label="Microsoft Azure" openDelay={200}>
-                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
-                      <FaMicrosoft size="24px" />
-                    </Box>
-                  </Tooltip>
-                  <Tooltip label="CompTIA" openDelay={200}>
-                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
-                      <FaTerminal size="24px" />
-                    </Box>
-                  </Tooltip>
-                  <Tooltip label="Python Institute" openDelay={200}>
-                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
-                      <FaPython size="24px" />
-                    </Box>
-                  </Tooltip>
-                </HStack>
+              {/* Brand Logos Row under the certifications list */}
+              <HStack spacing={6} pt={8} color={silverText} opacity={0.7} justify="start" w="100%">
+                <Tooltip label="Amazon Web Services" openDelay={200}>
+                  <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                    <FaAws size="28px" />
+                  </Box>
+                </Tooltip>
+                <Tooltip label="Microsoft Azure" openDelay={200}>
+                  <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                    <FaMicrosoft size="24px" />
+                  </Box>
+                </Tooltip>
+                <Tooltip label="CompTIA" openDelay={200}>
+                  <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                    <FaTerminal size="24px" />
+                  </Box>
+                </Tooltip>
+                <Tooltip label="Python Institute" openDelay={200}>
+                  <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                    <FaPython size="24px" />
+                  </Box>
+                </Tooltip>
+              </HStack>
             </Box>
           </FadeIn>
 
