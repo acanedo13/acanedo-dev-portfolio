@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { motion, useScroll, useSpring } from 'framer-motion'
 import { SunIcon, MoonIcon } from '@chakra-ui/icons'
-import { FaChevronRight, FaChevronLeft, FaPlay, FaEnvelope, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase } from 'react-icons/fa'
+import { FaChevronRight, FaChevronLeft, FaPlay, FaEnvelope, FaGithub, FaFileAlt, FaFigma, FaPython, FaReact, FaDocker, FaJs, FaMicrosoft, FaLinux, FaTerminal, FaGitAlt, FaHtml5, FaCss3Alt, FaDatabase, FaAws } from 'react-icons/fa'
 import { SiCanva, SiKubernetes, SiPostgresql, SiFastapi, SiSharp, SiDotnet, SiNeo4J } from 'react-icons/si'
 
 
@@ -517,6 +517,30 @@ function App() {
                   );
                 })}
               </VStack>
+
+                            {/* Brand Logos Row under the certifications list */}
+                <HStack spacing={6} pt={4} color={silverText} opacity={0.7} justify="start" w="100%">
+                  <Tooltip label="Amazon Web Services" openDelay={200}>
+                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                      <FaAws size="28px" />
+                    </Box>
+                  </Tooltip>
+                  <Tooltip label="Microsoft Azure" openDelay={200}>
+                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                      <FaMicrosoft size="24px" />
+                    </Box>
+                  </Tooltip>
+                  <Tooltip label="CompTIA" openDelay={200}>
+                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                      <FaTerminal size="24px" />
+                    </Box>
+                  </Tooltip>
+                  <Tooltip label="Python Institute" openDelay={200}>
+                    <Box _hover={{ color: mauveAccent, opacity: 1 }} transition="0.2s">
+                      <FaPython size="24px" />
+                    </Box>
+                  </Tooltip>
+                </HStack>
             </Box>
           </FadeIn>
 
