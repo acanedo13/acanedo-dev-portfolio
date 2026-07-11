@@ -504,7 +504,7 @@ function App() {
           {/* --- CERTIFICATIONS --- */}
           <FadeIn>
             <Box as="section">
-              <Text fontSize="sm" fontWeight="mono" color={mauveAccent} mt= {20} mb={10} letterSpacing="widest"sx={{"::before": { content: '"root@adriana:~# "' }, "::after": { content: '"_"', animation: "blink 1s infinite" }}}>CERTIFICATIONS</Text>
+              <Text fontSize="sm" fontWeight="mono" color={mauveAccent} mt= {10} mb={10} letterSpacing="widest"sx={{"::before": { content: '"root@adriana:~# "' }, "::after": { content: '"_"', animation: "blink 1s infinite" }}}>CERTIFICATIONS</Text>
                 <style>{`
                 @keyframes blink { 50% { opacity: 0; } }
               `}</style>
